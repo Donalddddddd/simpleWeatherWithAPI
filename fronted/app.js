@@ -1,4 +1,6 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://your-backend-app.railway.app/api' 
+  : 'http://localhost:5000/api';
 
 // DOM elements
 const cityInput = document.getElementById('cityInput');
