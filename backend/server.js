@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://simpleWeatherApp.vercel.app', // Your Vercel frontend URL
+    'https://simple-weather-bay-chi.vercel.app', // Your Vercel frontend URL
     process.env.FRONTEND_URL // Dynamic frontend URL
   ].filter(Boolean),
   credentials: true
