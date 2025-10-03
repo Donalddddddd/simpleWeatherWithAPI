@@ -1,4 +1,5 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+// Configuration
+const API_BASE_URL = 'https://weather-backend-z6hk.onrender.com';
 
 // DOM elements
 const cityInput = document.getElementById('cityInput');
@@ -83,11 +84,16 @@ function displayWeather(data) {
 async function loadHistory() {
     try {
         const response = await fetch(`${API_BASE_URL}/history`);
-        const history = await response.json();
         
+        if (!response.ok) {
+            throw new Error('Failed to load history');
+        }
+        
+        const history = await response.json();
         displayHistory(history);
     } catch (error) {
         console.error('Error loading history:', error);
+        historyList.innerHTML = '<div class="history-item">Error loading history</div>';
     }
 }
 
@@ -140,4 +146,14 @@ function hideError() {
 document.addEventListener('DOMContentLoaded', () => {
     loadHistory();
     cityInput.focus();
+    
+    // Test backend connection
+    fetch(`${API_BASE_URL}/health`)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Backend health:', data);
+        })
+        .catch(error => {
+            console.error('Backend connection failed:', error);
+        });
 });
