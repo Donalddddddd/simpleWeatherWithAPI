@@ -1,5 +1,5 @@
 // Configuration
-const API_BASE_URL = 'https://weather-backend-u240.onrender.com';
+const API_BASE_URL = 'https://weather-backend-u240.onrender.com/api';
 
 // DOM elements
 const cityInput = document.getElementById('cityInput');
