@@ -11,98 +11,28 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
-    'https://simple-weather-green-sigma.vercel.app' // Update after Vercel deployment
+    'https://simple-weather-green-sigma.vercel.app' // Will update after Vercel deployment
   ],
   credentials: true
 }));
 
 app.use(express.json());
 
-// FIXED: PostgreSQL configuration for Supabase with IPv4 force
-const getDbConfig = () => {
-  const connectionString = process.env.DATABASE_URL;
-  
-  // Parse the connection string to extract components
-  const url = new URL(connectionString);
-  
-  return {
-    host: url.hostname,
-    port: parseInt(url.port) || 5432,
-    database: url.pathname.substring(1), // Remove leading slash
-    user: url.username,
-    password: url.password,
-    ssl: {
-      rejectUnauthorized: false
-    },
-    // Force IPv4 connection
-    family: 4
-  };
-};
-
-let pool;
-
-// Initialize database connection with retry logic
-const initializePool = () => {
-  try {
-    const dbConfig = getDbConfig();
-    pool = new Pool(dbConfig);
-    
-    console.log('🔧 Database config:', {
-      host: dbConfig.host,
-      port: dbConfig.port,
-      database: dbConfig.database,
-      usingIPv4: true
-    });
-    
-    return pool;
-  } catch (error) {
-    console.error('❌ Failed to create database pool:', error);
-    throw error;
+// PostgreSQL configuration for Supabase
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
   }
-};
+});
 
-// Initialize the pool
-pool = initializePool();
-
-// Test database connection with retry
-async function testConnection(retries = 3, delay = 2000) {
-  for (let i = 0; i < retries; i++) {
-    try {
-      const client = await pool.connect();
-      const result = await client.query('SELECT NOW() as current_time');
-      console.log('✅ Database connected successfully. Current time:', result.rows[0].current_time);
-      client.release();
-      return true;
-    } catch (error) {
-      console.error(`❌ Database connection attempt ${i + 1} failed:`, error.message);
-      
-      if (i < retries - 1) {
-        console.log(`🔄 Retrying in ${delay}ms...`);
-        await new Promise(resolve => setTimeout(resolve, delay));
-      } else {
-        console.error('💥 All connection attempts failed');
-        return false;
-      }
-    }
-  }
-}
-
-// Database connection events
+// Test database connection
 pool.on('connect', () => {
-  console.log('✅ New client connected to database');
+  console.log('✅ Connected to Supabase PostgreSQL');
 });
 
 pool.on('error', (err) => {
-  console.error('💥 Database pool error:', err);
-});
-
-// Test connection on startup
-testConnection().then(success => {
-  if (success) {
-    console.log('🎉 Database connection established successfully');
-  } else {
-    console.log('⚠️  Database connection failed, but server will continue');
-  }
+  console.error('❌ Database connection error:', err);
 });
 
 // Routes
@@ -114,7 +44,7 @@ app.get('/api/weather/:city', async (req, res) => {
       return res.status(400).json({ error: 'City name is required' });
     }
 
-    // Fetch weather data
+    // Fetch weather data from OpenWeather API
     const weatherResponse = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${process.env.WEATHER_API_KEY}&units=metric`
     );
@@ -165,6 +95,7 @@ app.get('/api/history', async (req, res) => {
       'SELECT * FROM weather_searches ORDER BY search_date DESC LIMIT 10'
     );
     
+    // Format dates for better display
     const history = result.rows.map(item => ({
       ...item,
       search_date: new Date(item.search_date).toLocaleString()
@@ -184,16 +115,14 @@ app.get('/api/health', async (req, res) => {
     res.json({ 
       status: 'OK', 
       database: 'Connected',
-      timestamp: new Date().toISOString(),
-      environment: process.env.NODE_ENV || 'development'
+      timestamp: new Date().toISOString()
     });
   } catch (error) {
     console.error('Health check failed:', error);
     res.status(500).json({ 
       status: 'Error', 
       database: 'Disconnected',
-      error: error.message,
-      timestamp: new Date().toISOString()
+      error: error.message 
     });
   }
 });
@@ -202,8 +131,6 @@ app.get('/api/health', async (req, res) => {
 app.get('/', (req, res) => {
   res.json({ 
     message: 'Weather App Backend API',
-    status: 'Running',
-    database: 'Supabase PostgreSQL',
     endpoints: {
       weather: 'GET /api/weather/:city',
       history: 'GET /api/history',
@@ -214,6 +141,6 @@ app.get('/', (req, res) => {
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📊 Database URL: ${process.env.DATABASE_URL ? 'Configured' : 'Not configured'}`);
+  console.log(`📊 Database: ${process.env.DATABASE_URL ? 'Configured' : 'Not configured'}`);
   console.log(`🌤️ Weather API: ${process.env.WEATHER_API_KEY ? 'Configured' : 'Not configured'}`);
 });
