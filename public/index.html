@@ -3,93 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Dashboard</title>
+    <title>NEXUS WEATHER</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="app-container">
-        <!-- Animated background elements -->
-        <div class="bg-blur-1"></div>
-        <div class="bg-blur-2"></div>
-        <div class="bg-blur-3"></div>
+        <!-- Animated cyber grid background -->
+        <div class="cyber-grid"></div>
         
-        <header class="app-header glass">
+        <!-- Floating particles -->
+        <div class="particles-container"></div>
+        
+        <!-- Neon glow orbs -->
+        <div class="neon-orb orb-1"></div>
+        <div class="neon-orb orb-2"></div>
+        <div class="neon-orb orb-3"></div>
+        
+        <!-- Scan lines overlay -->
+        <div class="scan-lines"></div>
+
+        <header class="app-header futuristic-glass">
             <div class="header-content">
-                <h1 class="app-title">🌤️ Weather Dashboard</h1>
-                <p class="app-subtitle">Get real-time weather updates</p>
+                <div class="title-container">
+                    <h1 class="app-title">
+                        <span class="title-glow">NEXUS</span>
+                        <span class="title-sub">WEATHER SYSTEMS</span>
+                    </h1>
+                    <div class="cyber-line"></div>
+                </div>
+                <p class="app-subtitle">ATMOSPHERIC DATA INTERFACE v2.4.7</p>
             </div>
         </header>
 
         <main class="app-main">
             <section class="search-section">
-                <div class="search-container glass">
+                <div class="search-container futuristic-glass">
                     <div class="input-group">
-                        <input 
-                            type="text" 
-                            id="cityInput" 
-                            placeholder="Enter city name..." 
-                            class="search-input glass-input"
-                        >
-                        <button onclick="weatherApp.getWeather()" class="search-btn glass-btn primary">
-                            🔍 Search
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                id="cityInput" 
+                                placeholder="ENTER CITY COORDINATES..." 
+                                class="search-input cyber-input"
+                            >
+                            <div class="input-glow"></div>
+                        </div>
+                        <button onclick="weatherApp.getWeather()" class="search-btn cyber-btn primary">
+                            <span class="btn-text">INITIATE SCAN</span>
+                            <div class="btn-glow"></div>
                         </button>
                     </div>
-                    <button onclick="weatherApp.getLocation()" class="location-btn glass-btn secondary">
-                        📍 Use My Location
+                    <button onclick="weatherApp.getLocation()" class="location-btn cyber-btn secondary">
+                        <span class="btn-text">GEOLOCATE</span>
+                        <div class="btn-glow"></div>
                     </button>
                 </div>
             </section>
 
             <section class="weather-content">
-                <div id="loading" class="loading glass hidden">
-                    <div class="spinner"></div>
-                    <p>Loading weather data...</p>
+                <div id="loading" class="loading futuristic-glass hidden">
+                    <div class="cyber-spinner"></div>
+                    <p>ACCESSING WEATHER NETWORK...</p>
+                    <div class="loading-bar">
+                        <div class="loading-progress"></div>
+                    </div>
                 </div>
 
-                <div id="error" class="error-message glass hidden">
-                    <span class="error-icon">⚠️</span>
+                <div id="error" class="error-message futuristic-glass hidden">
+                    <span class="error-icon">⚠️ SYSTEM ALERT</span>
                     <span class="error-text"></span>
                 </div>
 
                 <div id="currentWeather" class="hidden">
-                    <div class="weather-card glass current-weather">
-                        <div class="weather-header">
-                            <h2 id="cityName" class="city-name"></h2>
+                    <div class="weather-card futuristic-glass current-weather">
+                        <div class="card-header">
+                            <div class="cyber-border"></div>
+                            <h2 id="cityName" class="city-name cyber-text"></h2>
                             <div id="lastUpdated" class="last-updated"></div>
                         </div>
                         
                         <div class="weather-main">
                             <div class="temperature-section">
                                 <div class="temperature">
-                                    <span id="temp" class="temp-value"></span>
+                                    <span id="temp" class="temp-value data-glow"></span>
                                     <span class="temp-unit">°C</span>
                                 </div>
                                 <div id="description" class="weather-description"></div>
                             </div>
-                            <img id="weatherIcon" src="" alt="Weather Icon" class="weather-icon">
+                            <div class="weather-icon-container">
+                                <img id="weatherIcon" src="" alt="Weather Icon" class="weather-icon">
+                                <div class="icon-halo"></div>
+                            </div>
                         </div>
 
                         <div class="weather-details">
                             <div class="details-grid">
-                                <div class="detail-item glass-inner">
-                                    <span class="detail-label">Feels like</span>
-                                    <span id="feelsLike" class="detail-value"></span>
+                                <div class="detail-item cyber-panel">
+                                    <div class="detail-icon">🌡️</div>
+                                    <span class="detail-label">THERMAL SENSOR</span>
+                                    <span id="feelsLike" class="detail-value data-glow"></span>
                                     <span class="detail-unit">°C</span>
                                 </div>
-                                <div class="detail-item glass-inner">
-                                    <span class="detail-label">Humidity</span>
-                                    <span id="humidity" class="detail-value"></span>
+                                <div class="detail-item cyber-panel">
+                                    <div class="detail-icon">💧</div>
+                                    <span class="detail-label">HUMIDITY INDEX</span>
+                                    <span id="humidity" class="detail-value data-glow"></span>
                                     <span class="detail-unit">%</span>
                                 </div>
-                                <div class="detail-item glass-inner">
-                                    <span class="detail-label">Wind</span>
-                                    <span id="windSpeed" class="detail-value"></span>
-                                    <span class="detail-unit">m/s</span>
+                                <div class="detail-item cyber-panel">
+                                    <div class="detail-icon">🌪️</div>
+                                    <span class="detail-label">WIND VELOCITY</span>
+                                    <span id="windSpeed" class="detail-value data-glow"></span>
+                                    <span class="detail-unit">M/S</span>
                                 </div>
-                                <div class="detail-item glass-inner">
-                                    <span class="detail-label">Pressure</span>
-                                    <span id="pressure" class="detail-value"></span>
-                                    <span class="detail-unit">hPa</span>
+                                <div class="detail-item cyber-panel">
+                                    <div class="detail-icon">📊</div>
+                                    <span class="detail-label">PRESSURE READ</span>
+                                    <span id="pressure" class="detail-value data-glow"></span>
+                                    <span class="detail-unit">HPA</span>
                                 </div>
                             </div>
                         </div>
@@ -97,14 +128,20 @@
                 </div>
 
                 <div id="forecast" class="hidden">
-                    <h3 class="forecast-title">5-Day Forecast</h3>
+                    <h3 class="forecast-title cyber-text">FORECAST PROTOCOL: 5-DAY CYCLE</h3>
                     <div id="forecastList" class="forecast-list"></div>
                 </div>
             </section>
         </main>
 
-        <footer class="app-footer glass">
-            <p>Powered by OpenWeatherMap</p>
+        <footer class="app-footer futuristic-glass">
+            <div class="footer-content">
+                <p>QUANTUM WEATHER NETWORK • CYBER SYSTEM ONLINE</p>
+                <div class="system-status">
+                    <span class="status-indicator"></span>
+                    <span>ALL SYSTEMS NOMINAL</span>
+                </div>
+            </div>
         </footer>
     </div>
 
