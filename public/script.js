@@ -1,5 +1,5 @@
 // API Configuration
-const API_BASE = 'https://simple-weather-kohl.vercel.app/api'; 
+const API_BASE = '/api'; // Change this to your backend API URL
 
 // DOM Elements
 const cityInput = document.getElementById('cityInput');
