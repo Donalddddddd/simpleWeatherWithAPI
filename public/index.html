@@ -3,63 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
+    <title>Weather Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🌤️ Weather Dashboard</h1>
-            <div class="search-container">
-                <input type="text" id="cityInput" placeholder="Enter city name...">
-                <button onclick="getWeather()">Search</button>
-                <button onclick="getLocation()">📍 Use My Location</button>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="app-title">🌤️ Weather Dashboard</h1>
+                <p class="app-subtitle">Get real-time weather updates</p>
             </div>
         </header>
 
-        <main>
-            <div id="loading" class="hidden">Loading...</div>
-            
-            <div id="currentWeather" class="hidden">
-                <div class="weather-card">
-                    <h2 id="cityName"></h2>
-                    <div class="weather-main">
-                        <img id="weatherIcon" src="" alt="Weather Icon">
-                        <div class="temperature">
-                            <span id="temp"></span>°C
-                        </div>
+        <main class="app-main">
+            <section class="search-section">
+                <div class="search-container">
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="cityInput" 
+                            placeholder="Enter city name..." 
+                            class="search-input"
+                        >
+                        <button onclick="weatherApp.getWeather()" class="search-btn">
+                            🔍 Search
+                        </button>
                     </div>
-                    <div class="weather-details">
-                        <p id="description"></p>
-                        <div class="details-grid">
-                            <div class="detail-item">
-                                <span>Feels like</span>
-                                <span id="feelsLike"></span>°C
+                    <button onclick="weatherApp.getLocation()" class="location-btn">
+                        📍 Use My Location
+                    </button>
+                </div>
+            </section>
+
+            <section class="weather-content">
+                <div id="loading" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>Loading weather data...</p>
+                </div>
+
+                <div id="error" class="error-message hidden">
+                    <span class="error-icon">⚠️</span>
+                    <span class="error-text"></span>
+                </div>
+
+                <div id="currentWeather" class="hidden">
+                    <div class="weather-card current-weather">
+                        <div class="weather-header">
+                            <h2 id="cityName" class="city-name"></h2>
+                            <div id="lastUpdated" class="last-updated"></div>
+                        </div>
+                        
+                        <div class="weather-main">
+                            <div class="temperature-section">
+                                <div class="temperature">
+                                    <span id="temp" class="temp-value"></span>
+                                    <span class="temp-unit">°C</span>
+                                </div>
+                                <div id="description" class="weather-description"></div>
                             </div>
-                            <div class="detail-item">
-                                <span>Humidity</span>
-                                <span id="humidity"></span>%
-                            </div>
-                            <div class="detail-item">
-                                <span>Wind</span>
-                                <span id="windSpeed"></span> m/s
-                            </div>
-                            <div class="detail-item">
-                                <span>Pressure</span>
-                                <span id="pressure"></span> hPa
+                            <img id="weatherIcon" src="" alt="Weather Icon" class="weather-icon">
+                        </div>
+
+                        <div class="weather-details">
+                            <div class="details-grid">
+                                <div class="detail-item">
+                                    <span class="detail-label">Feels like</span>
+                                    <span id="feelsLike" class="detail-value"></span>
+                                    <span class="detail-unit">°C</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Humidity</span>
+                                    <span id="humidity" class="detail-value"></span>
+                                    <span class="detail-unit">%</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Wind</span>
+                                    <span id="windSpeed" class="detail-value"></span>
+                                    <span class="detail-unit">m/s</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Pressure</span>
+                                    <span id="pressure" class="detail-value"></span>
+                                    <span class="detail-unit">hPa</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div id="forecast" class="hidden">
-                <h3>5-Day Forecast</h3>
-                <div id="forecastList" class="forecast-list"></div>
-            </div>
-
-            <div id="error" class="hidden error-message"></div>
+                <div id="forecast" class="hidden">
+                    <h3 class="forecast-title">5-Day Forecast</h3>
+                    <div id="forecastList" class="forecast-list"></div>
+                </div>
+            </section>
         </main>
+
+        <footer class="app-footer">
+            <p>Powered by OpenWeatherMap</p>
+        </footer>
     </div>
 
     <script src="script.js"></script>
