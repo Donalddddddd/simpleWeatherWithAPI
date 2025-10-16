@@ -8,7 +8,12 @@
 </head>
 <body>
     <div class="app-container">
-        <header class="app-header">
+        <!-- Animated background elements -->
+        <div class="bg-blur-1"></div>
+        <div class="bg-blur-2"></div>
+        <div class="bg-blur-3"></div>
+        
+        <header class="app-header glass">
             <div class="header-content">
                 <h1 class="app-title">🌤️ Weather Dashboard</h1>
                 <p class="app-subtitle">Get real-time weather updates</p>
@@ -17,37 +22,37 @@
 
         <main class="app-main">
             <section class="search-section">
-                <div class="search-container">
+                <div class="search-container glass">
                     <div class="input-group">
                         <input 
                             type="text" 
                             id="cityInput" 
                             placeholder="Enter city name..." 
-                            class="search-input"
+                            class="search-input glass-input"
                         >
-                        <button onclick="weatherApp.getWeather()" class="search-btn">
+                        <button onclick="weatherApp.getWeather()" class="search-btn glass-btn primary">
                             🔍 Search
                         </button>
                     </div>
-                    <button onclick="weatherApp.getLocation()" class="location-btn">
+                    <button onclick="weatherApp.getLocation()" class="location-btn glass-btn secondary">
                         📍 Use My Location
                     </button>
                 </div>
             </section>
 
             <section class="weather-content">
-                <div id="loading" class="loading hidden">
+                <div id="loading" class="loading glass hidden">
                     <div class="spinner"></div>
                     <p>Loading weather data...</p>
                 </div>
 
-                <div id="error" class="error-message hidden">
+                <div id="error" class="error-message glass hidden">
                     <span class="error-icon">⚠️</span>
                     <span class="error-text"></span>
                 </div>
 
                 <div id="currentWeather" class="hidden">
-                    <div class="weather-card current-weather">
+                    <div class="weather-card glass current-weather">
                         <div class="weather-header">
                             <h2 id="cityName" class="city-name"></h2>
                             <div id="lastUpdated" class="last-updated"></div>
@@ -66,22 +71,22 @@
 
                         <div class="weather-details">
                             <div class="details-grid">
-                                <div class="detail-item">
+                                <div class="detail-item glass-inner">
                                     <span class="detail-label">Feels like</span>
                                     <span id="feelsLike" class="detail-value"></span>
                                     <span class="detail-unit">°C</span>
                                 </div>
-                                <div class="detail-item">
+                                <div class="detail-item glass-inner">
                                     <span class="detail-label">Humidity</span>
                                     <span id="humidity" class="detail-value"></span>
                                     <span class="detail-unit">%</span>
                                 </div>
-                                <div class="detail-item">
+                                <div class="detail-item glass-inner">
                                     <span class="detail-label">Wind</span>
                                     <span id="windSpeed" class="detail-value"></span>
                                     <span class="detail-unit">m/s</span>
                                 </div>
-                                <div class="detail-item">
+                                <div class="detail-item glass-inner">
                                     <span class="detail-label">Pressure</span>
                                     <span id="pressure" class="detail-value"></span>
                                     <span class="detail-unit">hPa</span>
@@ -98,7 +103,7 @@
             </section>
         </main>
 
-        <footer class="app-footer">
+        <footer class="app-footer glass">
             <p>Powered by OpenWeatherMap</p>
         </footer>
     </div>

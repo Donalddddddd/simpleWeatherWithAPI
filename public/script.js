@@ -150,7 +150,7 @@ class WeatherApp {
             });
 
             const forecastItem = document.createElement('div');
-            forecastItem.className = 'forecast-item';
+            forecastItem.className = 'forecast-item glass';
             forecastItem.innerHTML = `
                 <div class="forecast-date">${formattedDate}</div>
                 <img src="https://openweathermap.org/img/wn/${day.icon}.png" 
