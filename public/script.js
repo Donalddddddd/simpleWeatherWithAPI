@@ -254,7 +254,7 @@ class WeatherApp {
     }
 
     loadDefaultCity() {
-        // Load weather for Tokyo on initial page load (futuristic default)
+        // Load weather for Caloocan on initial page load (futuristic default)
         setTimeout(() => {
             if (!document.getElementById('cityInput').value) {
                 document.getElementById('cityInput').placeholder = "Search..";
