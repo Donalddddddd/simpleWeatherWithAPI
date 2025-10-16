@@ -257,9 +257,9 @@ class WeatherApp {
         // Load weather for Tokyo on initial page load (futuristic default)
         setTimeout(() => {
             if (!document.getElementById('cityInput').value) {
-                document.getElementById('cityInput').placeholder = "INITIALIZING TOKYO SCAN...";
+                document.getElementById('cityInput').placeholder = "Search..";
                 setTimeout(() => {
-                    this.fetchWeatherData({ city: 'Tokyo' });
+                    this.fetchWeatherData({ city: 'Caloocan' });
                 }, 1000);
             }
         }, 800);
