@@ -518,7 +518,7 @@ body {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    margin-left: 0.5rem;
+    margin-left: 0.2rem;
 }
 
 .cyber-text {
@@ -532,6 +532,7 @@ body {
     color: var(--neon-green);
     font-size: 0.9rem;
     letter-spacing: 1px;
+    margin-left: 0.2rem;
 }
 
 .weather-main {
