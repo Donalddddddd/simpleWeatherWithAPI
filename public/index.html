@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌤️ Weather Dashboard</h1>
+            <div class="search-container">
+                <input type="text" id="cityInput" placeholder="Enter city name...">
+                <button onclick="getWeather()">Search</button>
+                <button onclick="getLocation()">📍 Use My Location</button>
+            </div>
+        </header>
+
+        <main>
+            <div id="loading" class="hidden">Loading...</div>
+            
+            <div id="currentWeather" class="hidden">
+                <div class="weather-card">
+                    <h2 id="cityName"></h2>
+                    <div class="weather-main">
+                        <img id="weatherIcon" src="" alt="Weather Icon">
+                        <div class="temperature">
+                            <span id="temp"></span>°C
+                        </div>
+                    </div>
+                    <div class="weather-details">
+                        <p id="description"></p>
+                        <div class="details-grid">
+                            <div class="detail-item">
+                                <span>Feels like</span>
+                                <span id="feelsLike"></span>°C
+                            </div>
+                            <div class="detail-item">
+                                <span>Humidity</span>
+                                <span id="humidity"></span>%
+                            </div>
+                            <div class="detail-item">
+                                <span>Wind</span>
+                                <span id="windSpeed"></span> m/s
+                            </div>
+                            <div class="detail-item">
+                                <span>Pressure</span>
+                                <span id="pressure"></span> hPa
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="forecast" class="hidden">
+                <h3>5-Day Forecast</h3>
+                <div id="forecastList" class="forecast-list"></div>
+            </div>
+
+            <div id="error" class="hidden error-message"></div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
